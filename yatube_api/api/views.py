@@ -9,7 +9,7 @@ from .serializers import (
     PostSerializer,
 )
 from .permissions import IsOwnerOrReadOnly
-from posts.models import Comment, Group, Post
+from posts.models import Group, Post
 
 
 class CreateListViewSet(mixins.CreateModelMixin,
@@ -47,11 +47,8 @@ class CommentViewSet(viewsets.ModelViewSet):
         IsOwnerOrReadOnly,)
 
     def get_queryset(self):
-        post_id = self.kwargs.get("post_id")
-        new_queryset = Comment.objects.filter(
-            post=get_object_or_404(Post, pk=post_id)
-        )
-        return new_queryset
+        post = get_object_or_404(Post, pk=self.kwargs.get('post_id'))
+        return post.comments.all()
 
     def perform_create(self, serializer):
         serializer.save(

@@ -36,5 +36,20 @@ python manage.py migrate
 ```
 python manage.py runserver
 ```
+
+### Примеры запросов
+
+Для получения токена, необходимо выполнить POST-запрос /api/v1/jwt/create/ передав поля username и password созданного пользователя.
+
+Передайте токен в заголовке Authorization: Bearer <токен>
+
+/api/v1/posts/ (GET, POST, PUT, PATCH, DELETE)
+
+/api/v1/posts/{post_id}/comments/ (GET, POST, PUT, PATCH, DELETE)
+
+/api/v1/groups/ (GET)
+
+/api/v1/follow/ (GET, POST)
+
 - ### Авторы:
 - Николай Гиржу.
